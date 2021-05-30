@@ -2,7 +2,7 @@
 
 ## Dataset Description
 
-### `toutiao.csv`
+### `toutiao.txt`
 
 Notice that this file is encoded in UTF-8, so make sure that you have set the correct encoding.
 
