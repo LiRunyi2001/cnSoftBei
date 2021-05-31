@@ -29,7 +29,7 @@ def preprocessing(path):
             exclude_sw = [word for word in jieba.cut(content) if word not in stop_words]
             content = ''.join([x.strip() for x in exclude_sw if x.strip() != ''])
             prep_data.append(f'__label__{label_map[label]} ' + content)
-    train_data, test_data = train_test_split(prep_data, test_size=0.4, random_state=0)
+    train_data, test_data = train_test_split(prep_data, test_size=0.3, random_state=0)
     train_data_path, test_data_path = path[:-4] + "_train.txt", path[:-4] + "_test.txt"
     write2txt(train_data, train_data_path)
     write2txt(test_data, test_data_path)
