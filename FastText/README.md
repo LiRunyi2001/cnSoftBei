@@ -3,7 +3,7 @@
 A very simple and fast method used to classify news.   
 Precision and Recall: approximate 88% on the Toutiao Dataset
 ## Usage
-**Only support querying one sentence at a time**
+**Only support querying one sentence at a time**  
 0. Install dependencies
    ```shell
    pip install requirements.txt
