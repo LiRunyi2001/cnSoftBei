@@ -5,7 +5,7 @@
 ### For Users
 
 * Download the binary file from [here](https://github.com/LiRunyi2001/cnSoftBei/releases/download/v1/FastTextGUI.zip).
-* Double click `main.py`
+* Extract it and double click `main.exe`
 
 ### For Developers
 
