@@ -4,10 +4,8 @@
 
 ### For Users
 
-* Download the binary file from [here](https://github.com/LiRunyi2001/cnSoftBei/archive/refs/tags/FastText-v1.zip).
+* Download the binary file from [here](https://github.com/LiRunyi2001/cnSoftBei/releases/download/v1/FastTextGUI.zip).
 * Double click `main.py`
-
-*
 
 ### For Developers
 
