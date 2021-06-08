@@ -94,17 +94,17 @@ def finetune_opts(parser):
 
 def infer_opts(parser):
     # Path options.
-    parser.add_argument("--load_model_path", default=None, type=str,
+    parser.add_argument("--load_model_path", default="models/model_5_epochs.bin", type=str,
                         help="Path of the input model.")
-    parser.add_argument("--vocab_path", default=None, type=str,
+    parser.add_argument("--vocab_path", default="models/google_zh_vocab.txt", type=str,
                         help="Path of the vocabulary file.")
     parser.add_argument("--spm_model_path", default=None, type=str,
                         help="Path of the sentence piece model.")
-    parser.add_argument("--test_path", type=str, required=True,
-                        help="Path of the testset.")
+    # parser.add_argument("--test_path", default="datasets/toutiao/test_nolabel.tsv" ,type=str, required=True,
+    #                     help="Path of the testset.")
     parser.add_argument("--prediction_path", type=str, required=True,
                         help="Path of the prediction file.")
-    parser.add_argument("--config_path", default="models/bert/base_config.json", type=str,
+    parser.add_argument("--config_path", default="models/bert/tiny_config.json", type=str,
                         help="Path of the config file.")
 
     # Model options.
