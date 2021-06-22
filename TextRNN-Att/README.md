@@ -1,79 +1,43 @@
-# Chinese-Text-Classification
-中文文本分类，TextCNN，TextRNN，FastText，TextRCNN，BiLSTM_Attention, DPCNN, Transformer, 基于pytorch，开箱即用。
-
-## 介绍
-模型介绍、数据流动过程：[我的博客](https://zhuanlan.zhihu.com/p/73176084)  
-
-数据以字为单位输入模型，预训练词向量使用 [搜狗新闻 Word+Character 300d](https://github.com/Embedding/Chinese-Word-Vectors)，[点这里下载](https://pan.baidu.com/s/14k-9jsspp43ZhMxqPmsWMQ)  
+# TextRNN-Attention
+采用BiLSTM+Attention模型，进行中文新闻文本分类。
 
 ## 环境
 python 3.7  
+
 pytorch 1.1  
+
 tqdm  
+
 sklearn  
+
 tensorboardX
 
-## 中文数据集
-我从[THUCNews](http://thuctc.thunlp.org/)中抽取了20万条新闻标题，已上传至github，文本长度在20到30之间。一共10个类别，每类2万条。
+### 下载
 
-类别：财经、房产、股票、教育、科技、社会、时政、体育、游戏、娱乐。
-
-数据集划分：
-
-数据集|数据量
---|--
-训练集|18万
-验证集|1万
-测试集|1万
+* 未分割的头条数据集：[toutiao.txt](https://1drv.ms/t/s!AkxNwDoH9nwHgyqpC70xBTybYdS_?e=LWplcc)
+* Toutiao文件夹下需要的数据集（直接复制到Toutiao下即可使用）：[Toutiao](https://1drv.ms/u/s!AkxNwDoH9nwHgyl5BZ4lQpiVtazm?e=qhJkmz)
+* 模型下载：[TextRNN_Att](https://1drv.ms/u/s!AkxNwDoH9nwHgzJ7cJb3K9vufYJr?e=E54TDc)
 
 
-### 更换自己的数据集
- - 如果用字，按照我数据集的格式来格式化你的数据。  
- - 如果用词，提前分好词，词之间用空格隔开，`python run.py --model TextCNN --word True`  
- - 使用预训练词向量：utils.py的main函数可以提取词表对应的预训练词向量。  
+### 使用自己的数据集
+1. 按照[toutiao.txt](https://1drv.ms/t/s!AkxNwDoH9nwHgyqpC70xBTybYdS_?e=LWplcc)的格式调整自己的数据集格式。
+2. 将 `train_test_split.py` 中 `split('toutiao.txt')` 中的文件换成自己的数据集。
+3. 执行 `python train_test_split.py` 得到 `train.txt`，`dev.txt`, `test.txt`，可根据需要修改参数 `test_size`。
+4. 把得到的数据移动到 `Toutiao` 下。
 
 
 ## 效果
 
-模型|acc|备注
---|--|--
-TextCNN|91.22%|Kim 2014 经典的CNN文本分类
-TextRNN|91.12%|BiLSTM 
-TextRNN_Att|90.90%|BiLSTM+Attention
-TextRCNN|91.54%|BiLSTM+池化
-FastText|92.23%|bow+bigram+trigram， 效果出奇的好
-DPCNN|91.25%|深层金字塔CNN
-Transformer|89.91%|效果较差
-bert|94.83%|bert + fc  
-ERNIE|94.61%|比bert略差(说好的中文碾压bert呢)  
-
-bert和ERNIE模型代码我放到另外一个仓库了，传送门：[Bert-Chinese-Text-Classification-Pytorch](https://github.com/649453932/Bert-Chinese-Text-Classification-Pytorch)，后续还会搞一些bert之后的东西，欢迎star。  
+模型|train_acc|val_acc|备注
+--|--|--|--
+ TextRNN_Att | 94.53%    | 93.31%  |BiLSTM+Attention
 
 ## 使用说明
-```
-# 训练并测试：
-# TextCNN
-python run.py --model TextCNN
 
-# TextRNN
-python run.py --model TextRNN
+* 模型训练
 
-# TextRNN_Att
-python run.py --model TextRNN_Att
+  ```go
+  python run.py --model TextRNN_Att
+  ```
 
-# TextRCNN
-python run.py --model TextRCNN
-
-# FastText, embedding层是随机初始化的
-python run.py --model FastText --embedding random 
-
-# DPCNN
-python run.py --model DPCNN
-
-# Transformer
-python run.py --model Transformer
-```
-
-### 参数
-模型都在models目录下，超参定义和模型定义在同一文件中。  
-
+  
