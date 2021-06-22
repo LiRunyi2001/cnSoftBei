@@ -1,0 +1,7 @@
+应包含以下文件：
+class.txt
+train.txt
+dev.txt
+test.txt
+embedding_SougouNews.npz
+vocab.pkl
