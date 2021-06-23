@@ -1,7 +1,12 @@
-应包含以下文件：
+训练时应包含以下文件：
 class.txt
 train.txt
 dev.txt
 test.txt
+embedding_SougouNews.npz
+vocab.pkl
+
+测试时应包含以下文件：
+customer.txt
 embedding_SougouNews.npz
 vocab.pkl
