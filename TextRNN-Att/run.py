@@ -6,7 +6,7 @@ from train_eval import train, init_network
 from importlib import import_module
 import argparse
 
-parser = argparse.ArgumentParser(description='Chinese Text Classification')
+parser = argparse.ArgumentParser(description='TextRNN-Attention')
 parser.add_argument('--model', type=str, required=True, help='choose a model: TextRNN_Att, Transformer')
 parser.add_argument('--embedding', default='pre_trained', type=str, help='random or pre_trained')
 parser.add_argument('--word', default=False, type=bool, help='True for word, False for char')
@@ -16,7 +16,6 @@ args = parser.parse_args()
 if __name__ == '__main__':
     dataset = 'Toutiao'  # 数据集
 
-    # 搜狗新闻:embedding_SougouNews.npz, 腾讯:embedding_Tencent.npz, 随机初始化:random
     embedding = 'embedding_SougouNews.npz'
     if args.embedding == 'random':
         embedding = 'random'

@@ -50,8 +50,6 @@ def build_dataset(config, ues_word):
                 v = lin.split('\t')
                 content = v[0]
                 label = v[1]
-                # print('content', content)
-                # print('label', label)
                 if not label.isdigit():
                     continue
                 words_line = []
@@ -75,13 +73,57 @@ def build_dataset(config, ues_word):
     return vocab, train, dev, test
 
 
+def one_sentence_prep(config, ues_word):
+    if ues_word:
+        tokenizer = lambda x: x.split(' ')  # 以空格隔开，word-level
+    else:
+        tokenizer = lambda x: [y for y in x]  # char-level
+    if os.path.exists(config.vocab_path):
+        vocab = pkl.load(open(config.vocab_path, 'rb'))
+    else:
+        vocab = build_vocab(config.train_path, tokenizer=tokenizer, max_size=MAX_VOCAB_SIZE, min_freq=1)
+        pkl.dump(vocab, open(config.vocab_path, 'wb'))
+
+    def load_dataset(path, pad_size=32):
+        contents = []
+        with open(path, 'r', encoding='UTF-8') as f:
+            for line in tqdm(f):
+                lin = line.strip()
+                if not lin:
+                    continue
+                v = lin.split('\t')
+                content = v[0]
+                label = '0'
+                if not label.isdigit():
+                    continue
+                words_line = []
+                token = tokenizer(content)
+                seq_len = len(token)
+                if pad_size:
+                    if len(token) < pad_size:
+                        token.extend([PAD] * (pad_size - len(token)))
+                    else:
+                        token = token[:pad_size]
+                        seq_len = pad_size
+                # word to id
+                for word in token:
+                    words_line.append(vocab.get(word, vocab.get(UNK)))
+                contents.append((words_line, int(label), seq_len))
+        return contents  # [([...], 0), ([...], 1), ...]
+
+    prepared_text = load_dataset(config.customer_path, config.pad_size)
+    return vocab, prepared_text
+
+
 class DatasetIterater(object):
     def __init__(self, batches, batch_size, device):
         self.batch_size = batch_size
         self.batches = batches
         self.n_batches = len(batches) // batch_size
         self.residue = False  # 记录batch数量是否为整数
-        if len(batches) % self.n_batches != 0:
+        if self.n_batches == 0:
+            self.residue = True
+        elif len(batches) % self.n_batches != 0:
             self.residue = True
         self.index = 0
         self.device = device

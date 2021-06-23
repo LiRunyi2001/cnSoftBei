@@ -41,5 +41,15 @@ tensorboardX
   ```
 
 
-* 单条新闻测试
+* 新闻测试
+
+  * 下载预训练模型 [TextRNN_Att](https://1drv.ms/u/s!AkxNwDoH9nwHgzJ7cJb3K9vufYJr?e=gULMPU) 至 `Toutiao/saved_dict` 文件夹下。
+
+  * 在 `data` 文件夹下的  `customer.txt` 中添加测试数据（可以是1条，也可以是多条），测试数据的格式需要与其中的示例数据保持一致。 然后执行下面的代码。
+
+  `````
+  python predict.py --model TextRNN_Att
+  `````
+
+  
 

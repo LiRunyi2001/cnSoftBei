@@ -117,3 +117,19 @@ def evaluate(config, model, data_iter, test=False):
         confusion = metrics.confusion_matrix(labels_all, predict_all)
         return acc, loss_total / len(data_iter), report, confusion
     return acc, loss_total / len(data_iter)
+
+
+def predict_one_sentence(config, model, data_iter):
+    dic = {0: '财经', 1: '房产', 2: '教育', 3: '科技', 4: '军事', 5: '汽车', 6: '体育', 7: '游戏', 8: '娱乐', 9: '其他'}
+    # predict one sentence
+    model.load_state_dict(torch.load(config.save_path))
+    model.eval()
+    predict_all = []
+    with torch.no_grad():
+        for texts, labels in data_iter:
+            outputs = model(texts)
+            predic = torch.max(outputs.data, 1)[1].cpu().numpy()
+            predict_all = np.append(predict_all, predic)
+    predict_all = [dic[l] for l in predict_all]
+    return predict_all
+
