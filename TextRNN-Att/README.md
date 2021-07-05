@@ -36,7 +36,7 @@ tensorboardX
 
 * 模型训练
 
-  ```go
+  ```python
   python run.py --model TextRNN_Att
   ```
 
@@ -47,9 +47,22 @@ tensorboardX
 
   * 在 `data` 文件夹下的  `customer.txt` 中添加测试数据（可以是1条，也可以是多条），测试数据的格式需要与其中的示例数据保持一致。 然后执行下面的代码。
 
-  `````
+  `````python
   python predict.py --model TextRNN_Att
   `````
 
-  
 
+* GUI
+
+  * 执行下面的命令。
+
+  `````python
+  python gui.py --model TextRNN_Att
+  `````
+
+  * 在弹出的窗口内输入新闻文本，获取结果。输入的新闻文本将保存在 `Toutiao/data/customer.txt`。
+
+  * GUI界面实例
+  
+    ![GUI界面实例](https://github.com/LiRunyi2001/cnSoftBei/blob/main/TextRNN-Att/gui.png)
+  
