@@ -13,7 +13,7 @@ window = sg.Window('新闻分类', layout)
 while True:
     event, values = window.read()
     # See if user wants to quit or window was closed
-    if event == sg.WINDOW_CLOSED or event == 'Quit':
+    if event == sg.WINDOW_CLOSED or event == '退出':
         break
     # Output a message to the window
     label_map = {"1": "财经", "2": "房产", "3": "教育", "4": "科技", "5": "军事", "6": "汽车", "7": "体育", "8": "游戏", "9": "娱乐", "10": "其他"}
