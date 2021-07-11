@@ -3,6 +3,7 @@ from importlib import import_module
 import argparse
 from utils import one_sentence_prep, build_iterator
 from train_eval import predict_one_sentence
+import pandas as pd
 
 parser = argparse.ArgumentParser(description='TextRNN-Attention')
 parser.add_argument('--model', type=str, required=True, help='choose a model: TextRNN_Att, Transformer')
@@ -11,12 +12,12 @@ parser.add_argument('--word', default=False, type=bool, help='True for word, Fal
 args = parser.parse_args()
 
 if __name__ == '__main__':
-    dataset = 'Toutiao'  # 数据集
+    dataset = 'Toutiao'  # dataset
     embedding = 'embedding_SougouNews.npz'
 
     if args.embedding == 'random':
         embedding = 'random'
-    model_name = args.model  # 'TextRNN_Att, Transformer
+    model_name = args.model  # TextRNN_Att or Transformer
     from utils import get_time_dif
 
     x = import_module('models.' + model_name)
@@ -30,9 +31,14 @@ if __name__ == '__main__':
 
     # predict
     config.n_vocab = len(vocab)
-    model = x.Model(config).to(config.device)
+    model = x.Model(config).to(config.device)  # load the model
     res = predict_one_sentence(config, model, test_iter)
-    print('The predicted result is:\n', res)
+    print(len(res))  # show the result
+
+    # save to a file.
+    df = pd.DataFrame(res)
+    df['channelName'] = res
+    df.to_csv(r'./res.csv', columns=['channelName'], index=False, sep=',')
 
     time_dif = get_time_dif(start_time)
     print("Time usage:", time_dif)
