@@ -4,8 +4,7 @@
 
 ### For Users
 
-* Download the binary file from [here](https://github.com/LiRunyi2001/cnSoftBei/releases/download/v2/FastTextNewGUI.zip).
-* Extract it and double click `main.exe`
+* Download and open the binary file from [here](https://github.com/LiRunyi2001/cnSoftBei/releases/download/v3/FastTextGUI.exe).
 
 ### For Developers
 
@@ -18,7 +17,6 @@
     pip install PySimpleGUI
     pip install pyinstaller
     pip install pandas
-    pip install
   ```
 
 * Enjoy coding.
