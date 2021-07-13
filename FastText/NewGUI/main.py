@@ -2,6 +2,20 @@ import PySimpleGUI as sg
 import pandas as pd
 import fasttext
 import re
+import os
+import sys
+
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
 sg.theme('TealMono')  # please make your windows colorful
 
 layout = [[sg.Text('请输入数据集文件路径', font='微软雅黑')],
@@ -13,9 +27,9 @@ event, values = window.read()
 if event == "确定":
     source_filename = values[0]
     sg.popup("数据处理中...", font='微软雅黑')
-    dt = pd.read_excel(source_filename, sheet_name="类别")
+    dt = pd.read_excel(source_filename)
     label_map = {"1": "财经", "2": "房产", "3": "教育", "4": "科技", "5": "军事", "6": "汽车", "7": "体育", "8": "游戏", "9": "娱乐", "10": "其他"}
-    model = fasttext.load_model("./model.bin")
+    model = fasttext.load_model(resource_path("model.bin"))
     str_strip = lambda str: re.sub(r"\s+", "", str)
     dt['channelName'] = dt.apply(lambda row: label_map[model.predict(str_strip(row['title'] + row['content']))[0][0].split("__")[-1]], axis=1)
     dt.to_excel(source_filename, sheet_name="类别")
