@@ -4,7 +4,7 @@
 
 ### For Users
 
-* Download and open the binary file from [here](https://github.com/LiRunyi2001/cnSoftBei/releases/download/v3/FastTextGUI.exe).
+* Download the executive file for Windows from [here](https://github.com/LiRunyi2001/cnSoftBei/releases/download/v3/FastTextGUI.exe).
 
 ### For Developers
 
