@@ -16,6 +16,3 @@ Labels:
 
 These labels are totally same as labels in the official dataset.
 
-## Documentation
-
-All paperwork in relation to the cnSoftBei.
